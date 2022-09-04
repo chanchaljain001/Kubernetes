@@ -76,13 +76,13 @@ EOF
 •	Initiate Cluster setup from any Master Node.
 [root@master-a ~]# screen -S K8s
 
-[root@master-a ~]# kubeadm init --control-plane-endpoint "loadbalancer:6443" --upload-certs --pod-network-cidr=10.8.0.0/16
+[root@master-a ~]# kubeadm init --control-plane-endpoint "master01:6443" --upload-certs --pod-network-cidr=10.8.0.0/16
 
-[root@worker-a ~]# kubeadm join loadbalancer:6443 --token 37oxyc.n0uf6dh50g5bu6sw \
+[root@worker-a ~]# kubeadm join "master01:6443 --token 37oxyc.n0uf6dh50g5bu6sw \
     --discovery-token-ca-cert-hash sha256:2cd93e097c694a1a532eb30db9e5d57368def7281fa0a2fd248a2c0ae6847aee
  
 	
-[root@worker-b ~]# kubeadm join loadbalancer:6443 --token 37oxyc.n0uf6dh50g5bu6sw \
+[root@worker-b ~]# kubeadm join "master01:6443 --token 37oxyc.n0uf6dh50g5bu6sw \
 >     --discovery-token-ca-cert-hash sha256:2cd93e097c694a1a532eb30db9e5d57368def7281fa0a2fd248a2c0ae6847aee
  
 

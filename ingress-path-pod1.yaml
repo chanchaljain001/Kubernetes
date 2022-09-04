@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ingress-path-pod1
+  labels:
+    app: ingress-path-pod1
+spec:
+  volumes:
+  - name: data
+    emptyDir: {}
+  initContainers:
+  - name: init-centos
+    image: docker.io/centos
+    volumeMounts:
+    - name: data
+      mountPath: /usr/local/apache2/htdocs/centos1/
+    command: ['sh', '-c', 'echo Hello to Centos1 > /usr/local/apache2/htdocs/centos1/index.html']
+  containers:
+  - name: web1
+    image: httpd
+    volumeMounts:
+    - name: data
+      mountPath: /usr/local/apache2/htdocs/centos1/

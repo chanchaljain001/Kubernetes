@@ -1,25 +1,25 @@
-•	Set Hostname on Nodes
+Set Hostname on Nodes
 # hostnamectl set-hostname <hostname>
 
-•	Update /etc/hosts file on all node
+•Update /etc/hosts file on all node
 172.24.0.161      master-a
 172.24.0.163      worker-a
 
-•	Update all the nodes and install few OS core packages
+•Update all the nodes and install few OS core packages
 # yum update –y
 # yum install wget gcc pcre-static pcre-devel curl -y
 
-•	Disable/Permissive selinux on all nodes
+•Disable/Permissive selinux on all nodes
 # cat /etc/sysconfig/selinux
 SELINUX=permissive
 
 # init 6
 
-•	Disable Swap
+•Disable Swap
 Memory swap can lead the performance and stability issues on host. So kuberenetes does allow the swap to enable. 
 # sed -i '/swap/d' /etc/fstab; swapoff -a; swapon –s
 
-•	Create repository file and send it to all nodes
+•Create repository file and send it to all nodes
 [root@loadbalancer ~]# cat > /etc/yum.repos.d/kubernetes.repo <<EOF
 [kubernetes]
 name=Kubernetes
@@ -30,20 +30,19 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
-•	Install kubeadm, kubectl, kubelet and docker package on all the nodes
+•Install kubeadm, kubectl, kubelet and docker package on all the nodes
 Note – For Centos 7 in virtualization, in-premises we need to install docker-ce as driver however if we are installing it on cloud premises then we need to install docker.
-#
 
-yum install -y kubelet-1.23.8-0 kubeadm-1.23.8-0 kubectl-1.23.8-0 docker 
+#yum install -y kubelet-1.23.8-0 kubeadm-1.23.8-0 kubectl-1.23.8-0 docker 
 
 # yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo ; yum install -y kubelet-1.18.4 kubeadm-1.18.4 kubectl-1.18.4 docker-ce"; done
 
-•	Stop and disable firewall on all nodes
+•Stop and disable firewall on all nodes
 # systemctl disable firewalld; systemctl stop firewalld 
 
 Note – If we keep firewall enabled then we need to add below ports
 
-•	Enable ports On Master Nodes (master-a, master-b)
+•Enable ports On Master Nodes (master-a, master-b)
 # firewall-cmd --permanent --add-port=6443/tcp
 # firewall-cmd --permanent --add-port=2379-2380/tcp
 # firewall-cmd --permanent --add-port=10250/tcp

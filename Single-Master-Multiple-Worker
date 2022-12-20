@@ -74,8 +74,9 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 
-# sysctl -p
-
+# sysctl -p ( for persistent)
+ to check    #sysctl -a | grep net.bridge.bridge-nf-call-ip
+ 
 •	Initiate Cluster setup from any Master Node.
 [root@master-a ~]# screen -S K8s
 

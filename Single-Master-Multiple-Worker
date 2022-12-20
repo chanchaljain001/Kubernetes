@@ -1,9 +1,12 @@
-Set Hostname on Nodes
+Step1.  Set Hostname on Nodes
 # hostnamectl set-hostname <hostname>
 
 •Update /etc/hosts file on all node
 172.24.0.161      master-a
 172.24.0.163      worker-a
+
+Note - if package not install check /etc/resolv.conf
+nameserver 8.8.8.8
 
 •Update all the nodes and install few OS core packages
 # yum update –y

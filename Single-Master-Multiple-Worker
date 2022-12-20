@@ -17,7 +17,7 @@ SELINUX=permissive
 
 •Disable Swap
 Memory swap can lead the performance and stability issues on host. So kuberenetes does allow the swap to enable. 
-# sed -i '/swap/d' /etc/fstab; swapoff -a; swapon –s
+# sed -i '/swap/d' /etc/fstab; swapoff -a; swapon -s
 
 •Create repository file and send it to all nodes
 [root@loadbalancer ~]# cat > /etc/yum.repos.d/kubernetes.repo <<EOF
